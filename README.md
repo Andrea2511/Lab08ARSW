@@ -1,7 +1,7 @@
-### Escuela Colombiana de Ingeniería
-### Arquitecturas de Software - ARSW
-### Laboratorio - Broker de Mensajes STOMP con WebSockets + HTML5 Canvas.
+# Laboratorio - Broker de Mensajes STOMP con WebSockets + HTML5 Canvas.
 
+## Andrea Valentina Torres Tobar
+## Andres Serrato Camero
 
 
 - Conectarse con un botón
@@ -18,15 +18,11 @@ Este ejercicio se basa en la documentación oficial de SprinbBoot, para el [mane
 
 En este repositorio se encuentra una aplicación SpringBoot que está configurado como Broker de mensajes, de forma similar a lo mostrado en la siguiente figura:
 
-![](https://docs.spring.io/spring/docs/current/spring-framework-reference/images/message-flow-simple-broker.png)
-
 En este caso, el manejador de mensajes asociado a "/app" aún no está configurado, pero sí lo está el broker '/topic'. Como mensaje, se usarán puntos, pues se espera que esta aplicación permita progragar eventos de dibujo de puntos generados por los diferentes clientes.
 
 ## Parte I.
 
 Para las partes I y II, usted va a implementar una herramienta de dibujo colaborativo Web, basada en el siguiente diagrama de actividades:
-
-![](img/P1-AD.png)
 
 Para esto, realice lo siguiente:
 
@@ -56,6 +52,7 @@ Para esto, realice lo siguiente:
 	git commit -m "PARTE 1".
 	```
 
+![img_1.png](img/img_1.png)
 
 ## Parte II.
 
@@ -69,6 +66,8 @@ Para hacer mas útil la aplicación, en lugar de capturar las coordenadas con ca
 	```bash
 	git commit -m "PARTE 2".
 	```
+
+![img.png](img/img.png)
 
 ## Parte III.
 

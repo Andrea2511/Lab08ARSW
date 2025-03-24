@@ -39,7 +39,6 @@ var app = (function () {
 
             stompClient.subscribe('/topic/points', function(message){
                 var receivedPoint = JSON.parse(message.body);
-                alert(`Nuevo punto recibido: (${receivedPoint.x}, ${receivedPoint.y})`);
                 addPointToCanvas(receivedPoint);
             });
         });
