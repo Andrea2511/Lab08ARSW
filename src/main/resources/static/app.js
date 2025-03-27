@@ -49,10 +49,16 @@ var app = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             
-            // Subscribe to the dynamic topic using the drawing ID
+            // Subscribe to the points topic
             stompClient.subscribe('/topic/newpoint.' + drawingId, function (eventbody) {
                 var point = JSON.parse(eventbody.body);
                 drawPoint(point.x, point.y);
+            });
+            
+            // Subscribe to the polygon topic
+            stompClient.subscribe('/topic/newpolygon.' + drawingId, function (eventbody) {
+                var polygon = JSON.parse(eventbody.body);
+                drawPolygon(polygon.points);
             });
             
             // Update UI to show connected status
@@ -73,15 +79,15 @@ var app = (function () {
         var pt = new Point(px, py);
         console.log("Publishing point: " + JSON.stringify(pt));
         
-        // Send to the dynamic topic based on drawing ID
-        stompClient.send("/topic/newpoint." + drawingId, {}, JSON.stringify(pt));
+        // Send to app destination
+        stompClient.send("/app/newpoint." + drawingId, {}, JSON.stringify(pt));
     };
 
     var getMousePosition = function (canvas, evt) {
         var rect = canvas.getBoundingClientRect();
         return {
-            x: evt.clientX - rect.left,
-            y: evt.clientY - rect.top
+            x: Math.round(evt.clientX - rect.left),
+            y: Math.round(evt.clientY - rect.top)
         };
     };
     
@@ -89,6 +95,30 @@ var app = (function () {
         context.beginPath();
         context.arc(px, py, 3, 0, 2 * Math.PI);
         context.fillStyle = "#000000";
+        context.fill();
+    };
+    
+    var drawPolygon = function (points) {
+        if (points.length < 3) return; // Need at least 3 points for a polygon
+        
+        context.beginPath();
+        context.moveTo(points[0].x, points[0].y);
+        
+        // Draw lines to all other points
+        for (var i = 1; i < points.length; i++) {
+            context.lineTo(points[i].x, points[i].y);
+        }
+        
+        // Close the polygon
+        context.closePath();
+        
+        // Style the polygon
+        context.lineWidth = 2;
+        context.strokeStyle = "#FF0000";
+        context.stroke();
+        
+        // Fill with semi-transparent color
+        context.fillStyle = "rgba(255, 0, 0, 0.2)";
         context.fill();
     };
     
