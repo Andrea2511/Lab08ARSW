@@ -17,19 +17,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Collaborative Paint</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="/webjars/jquery/jquery.min.js"></script>
-        <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-        <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+        <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+        <script src="/webjars/sockjs-client/1.0.2/sockjs.min.js"></script>
+        <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
         <script src="/app.js"></script>
 
     </head>
-
-
     
-    <body onload="app.init()">
-        <canvas id="canvas" width="800" height="600" style="border:1px solid black;"></canvas>
+    <body>
+        <div class="container">
+            <h1>Collaborative Drawing</h1>
+            <div class="control-panel">
+                <label for="drawingId">Drawing ID:</label>
+                <input type="number" id="drawingId" placeholder="Enter drawing ID" min="1">
+                <button id="connectBtn" onclick="app.connect()">Connect</button>
+                <span id="connectionStatus">Not connected</span>
+            </div>
+            <canvas id="canvas" width="800" height="600" style="border:1px solid black;"></canvas>
+        </div>
     </body>
 </html>
